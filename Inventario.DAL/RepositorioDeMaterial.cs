@@ -1,5 +1,5 @@
-﻿using Inventario.COMMON.Entidades;
-using Inventario.COMMON.Interfaces;
+﻿using Inventario.COMMON.Interfaces;
+using Inventario.COMMON.Entidades;
 using LiteDB;
 using System;
 using System.Collections.Generic;
@@ -8,37 +8,37 @@ using System.Text;
 
 namespace Inventario.DAL
 {
-    public class RepositorioDeEmpleados : IRepositorio<Empleado>
+    public class RepositorioDeMateriales : IRepositorio<Material>
     //Base de datos NoSQL -> Orientada a Objetos -> LiteDB
     {
         private string DBName = "Inventario.db";
-        private string TableName = "Empleados";
+        private string TableName = "Material";
 
 
 
-        public List<Empleado> Read
+        public List<Material> Read
         {
 
             get
             {
-                List<Empleado> datos = new List<Empleado>();
+                List<Material> datos = new List<Material>();
                 using (var db = new LiteDatabase(DBName))
                 {
-                    datos = db.GetCollection<Empleado>(TableName).FindAll().ToList();
+                    datos = db.GetCollection<Material>(TableName).FindAll().ToList();
 
                 }
                 return datos;
             }
         }
 
-        public bool Crear(Empleado entidad)
+        public bool Crear(Material entidad)
         {
             entidad.Id = new Guid.NewGuid().ToString();
             try
             {
                 using (var db = new LiteDatabase(DBName))
                 {
-                    var coleccion = db.GetCollection<Empleado>(TableName);
+                    var coleccion = db.GetCollection<Material>(TableName);
                     coleccion.Insert(entidad);
                 }
                 return true;
@@ -49,13 +49,13 @@ namespace Inventario.DAL
             }
         }
 
-        public bool Editar(Empleado entidadModificada)
+        public bool Editar(Material entidadModificada)
         {
             try
             {
                 using (var db = new LiteDatabase(DBName))
                 {
-                    var coleccion = db.GetCollection<Empleado>(TableName);
+                    var coleccion = db.GetCollection<Material>(TableName);
                     coleccion.Update(entidadModificada);
                 }
                 return true;
@@ -73,7 +73,7 @@ namespace Inventario.DAL
                 int r;
                 using (var db = new LiteDatabase(DBName))
                 {
-                    var coleccion = db.GetCollection<Empleado>(TableName);
+                    var coleccion = db.GetCollection<Material>(TableName);
                     r = coleccion.Delete(e => e.Id == Id);
                 }
                 return r > 0;
@@ -85,4 +85,4 @@ namespace Inventario.DAL
         }
     }
 }
-       
+

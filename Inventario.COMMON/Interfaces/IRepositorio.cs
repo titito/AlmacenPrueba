@@ -10,7 +10,7 @@ namespace Inventario.COMMON.Interfaces
     {
         bool Crear(T entidad);
 
-        List<T> Leer { get; }
+        List<T> Read { get; }
 
         bool Editar (T entidadModificada);
 

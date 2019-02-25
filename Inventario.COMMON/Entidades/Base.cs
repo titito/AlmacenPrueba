@@ -6,6 +6,6 @@ namespace Inventario.COMMON.Entidades
 {
     public abstract class Base
     {
-        public string id { get; set; }
+        public string Id { get; set; }
     }
 }
